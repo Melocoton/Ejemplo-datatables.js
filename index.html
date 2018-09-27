@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Datatable</title>
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- CSS DATATABLE -->
+    <link rel="stylesheet" href="css/datatable/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="css/datatable/buttons.dataTables.min.css" />
+    <link rel="stylesheet" href="css/datatable/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="css/datatable/scroller.dataTables.min.css" />
+    <link rel="stylesheet" href="css/datatable/select.dataTables.min.css" />
+    <!-- FIN CSS DATATABLE -->
+</head>
+<body>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- JAVASCRIPT DATATABLE -->
+    <script src="js/datatable/jszip.min.js"></script>
+    <script src="js/datatable/pdfmake.min.js"></script>
+    <script src="js/datatable/vfs_fonts.js"></script>
+    <script src="js/datatable/jquery.dataTables.min.js"></script>
+    <script src="js/datatable/dataTables.buttons.min.js"></script>
+    <script src="js/datatable/buttons.html5.min.js"></script>
+    <script src="js/datatable/dataTables.responsive.min.js"></script>
+    <script src="js/datatable/dataTables.scroller.min.js"></script>
+    <script src="js/datatable/dataTables.select.min.js"></script>
+    <!-- FIN JAVASCRIPT DATATABLE -->
+    <script src="js/materialize.min.js"></script>
+    <script src="js/datatable.js"></script>
+
+    <div class="row">
+        <br><br>
+        <div class="col s12 m12 l10 offset-l1">
+            <h4>
+                GASTOS 
+                <a href="#!" class="btn cyan darken-1" onclick="cargar()">Cargar nuevos datos</a>
+                <span id="totalGastos"></span>
+                <hr>
+            </h4>
+            <table id="gastosDatatable" class="compact hover nowrap">
+                <thead>
+                    <tr>
+                        <th><i class="material-icons tiny">today</i> FECHA FACTURA</th>
+                        <th><i class="material-icons tiny">comment</i> CONCEPTO</th>
+                        <th><i class="material-icons tiny">euro_symbol</i> IMPORTE</th>
+                        <th><i class="material-icons red-text">delete_forever</i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
