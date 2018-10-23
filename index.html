@@ -5,30 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Datatable</title>
-    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- CSS DATATABLE -->
-    <link rel="stylesheet" href="css/datatable/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="css/datatable/buttons.dataTables.min.css" />
-    <link rel="stylesheet" href="css/datatable/responsive.dataTables.min.css" />
-    <link rel="stylesheet" href="css/datatable/scroller.dataTables.min.css" />
-    <link rel="stylesheet" href="css/datatable/select.dataTables.min.css" />
+    <link rel="stylesheet" href="datatables/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="datatables/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" href="datatables/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="datatables/css/scroller.dataTables.min.css" />
+    <link rel="stylesheet" href="datatables/css/select.dataTables.min.css" />
     <!-- FIN CSS DATATABLE -->
 </head>
 <body>
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- JAVASCRIPT DATATABLE -->
-    <script src="js/datatable/jszip.min.js"></script>
-    <script src="js/datatable/pdfmake.min.js"></script>
-    <script src="js/datatable/vfs_fonts.js"></script>
-    <script src="js/datatable/jquery.dataTables.min.js"></script>
-    <script src="js/datatable/dataTables.buttons.min.js"></script>
-    <script src="js/datatable/buttons.html5.min.js"></script>
-    <script src="js/datatable/dataTables.responsive.min.js"></script>
-    <script src="js/datatable/dataTables.scroller.min.js"></script>
-    <script src="js/datatable/dataTables.select.min.js"></script>
+    <!-- Los archivos js y css se pueden descargar de  https://datatables.net/download, tambien tenemos la posibilidad de agruparlos en un solo archivo o usar un cdn-->
+    <script src="datatables/js/jquery.dataTables.min.js"></script><!-- Script principal -->
+    <script src="datatables/js/dataTables.buttons.min.js"></script><!-- Necesario para incluir botones personalizados -->
+    <script src="datatables/js/buttons.html5.min.js"></script><!-- Botones de exportacion -->
+    <script src="datatables/js/jszip.min.js"></script><!-- Necesario para exportar a excel -->
+    <script src="datatables/js/pdfmake.min.js"></script><!-- Necesario para exportar a pdf -->
+    <script src="datatables/js/vfs_fonts.js"></script><!-- Fuentes para los pdf -->
+    <script src="datatables/js/dataTables.responsive.min.js"></script><!-- Extension para compactar las columnas si no caben y dar responsividad extra -->
+    <script src="datatables/js/dataTables.scroller.min.js"></script><!-- Añade una barra de scroll vertical para compactar la tabla -->
+    <script src="datatables/js/dataTables.select.min.js"></script><!-- Añade la posibilidad de seleccionar filas, columnas o celdas -->
     <!-- FIN JAVASCRIPT DATATABLE -->
-    <script src="js/materialize.min.js"></script>
     <script src="js/datatable.js"></script>
 
     <div class="row">
@@ -40,6 +41,7 @@
                 <span id="totalGastos"></span>
                 <hr>
             </h4>
+            <!-- Creamos una tabla html, la asignamos un id y ponemos las columnas que queramos mostrar -->
             <table id="gastosDatatable" class="compact hover nowrap">
                 <thead>
                     <tr>
@@ -51,7 +53,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        
+                        <!-- Si no cargamos los datos desde un json, podemos crear la datatable a partir de del html -->
                     </tr>
                 </tbody>
             </table>

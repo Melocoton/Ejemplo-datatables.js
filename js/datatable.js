@@ -1,7 +1,7 @@
 let tabla;
 document.addEventListener('DOMContentLoaded', () => {
-    tabla = $('#gastosDatatable').DataTable({
-        "ajax": "datos/datos1.json",
+    tabla = $('#gastosDatatable').DataTable({ //Inicializamos la tabla
+        "ajax": "datos/datos1.json", //aqui indicamos la url si queremos cargar los datos por ajax, no borramos esta linea se creara una datatable con los datos del html
         "paging": true, //habilita la agrupacion por paginas de X cantidad
         "pagingType": "first_last_numbers", //opciones de paging habilitadas: numbers, full_numbers, first_last_numbers
         "lengthChange": true, //habilita la opcion de agrupar X filas por pagina
@@ -10,10 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         //"ordering": true, //habilita la ordenacion asc/desc de cada columna, no aplica si parametrizas columnDefs
         "scrollCollapse": true, //permite a la tabla reducir la altura cuando hay pocos datos, aunque se haya fijado una altura
         "scrollY": "400px", //altura de la tabla
-        "searching": true,
-        "search": {
-            "caseInsensitive": true,
-            "smart": true,
+        "searching": true, //habilita la busqueda
+        "search": { //opciones de busqueda
+            "caseInsensitive": true, //Indica si se ignoran las mayusculas
+            "smart": true, //filtro inteligente de datatables https://datatables.net/reference/option/search.smart
+            //"regex" : true //trata el texto de busqueda como una expresion regular
         },
         "stateSave": true, //si true: las parametrizaciones hechas se conservan incluso al recargar/salir de la pagina
         "stateDuration": 30, //en segundos. 0 => infinito
@@ -28,14 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
             { className: "color2 white-text" },
             { className: "color3 white-text" }
           ],*/
-        "order": [[ 0, "desc" ]],
-        "columnDefs": [
+        "order": [[ 0, "desc" ]], //permite aplicar un orden predefinido a las columnas
+        "columnDefs": [ //configuracion de cada columna
             {
                 "width": "auto",
-                "targets": [0],
-                "orderable": false,
-                "searchable": true,
-                "className": "center",                
+                "targets": [0], //indica que dato vamos a colocar en la columna, en este caso el primer dato de cada "fila" del json
+                "orderable": false, //indica si se puede reordenar la columna (funciona aveces)
+                "searchable": true, //indica si se puede buscar datos de esta columna
+                "className": "center", //aplica clases css a la columna
             },
             {
                 "width": "auto",
@@ -51,7 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 "searchable": true,
                 "className": "center",
                 "render" : (data, type, row) => {
-                    return `${row[2].toFixed(2)}€`
+                    /*
+                    Nos permite mostrar datos en la celda de forma personalizada, ya sea una transformacion matematica o un html personalizado para mostrar un boton, imagen...
+                    data -> hace referencia al dato correspondiente a la celda
+                    type -> es el tipo de variable que tiene data
+                    row  -> hace referencia a toda la fila actual
+                    */
+                    return `${data.toFixed(2)}€` //ej: convertimos el dato actual a un string con dos posiciones decimales y concatenamos "€"
                 }
             },
             {
@@ -61,19 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 "searchable": false,
                 "className": "center",
                 "render": (data, type, row) => {
-                    return `<a href="#!" class="red-text" onclick="borrarRegistro(${row[3]})">Borrar</a>`; 
+                    return `<a href="#!" class="white-text btn red darken-4" onclick="borrarRegistro(${row[3]})">Borrar</a>`; //ej: Creamos un boton que llama a la funcion borrarRegistro, la cual pasara el dato de la tercera celda
                 },
             }
-            /* {
-                //"width": "0%", //width a 0 o sin definir o no funciona
-                "targets": [7],
-                "orderable": true,
-                "searchable": true,
-                "className": "DTR",
-            }, */
         ],
         "autoWidth": true,
-        "language": {
+        "language": { //configuracion del idioma mostrado
             "emptyTable": "No existe ningún registro de gastos",
             "info": "<span class=\"negrita textcolor1\">Página _PAGE_/_PAGES_ de un total de _TOTAL_ registros de gastos</span>",
             "infoEmpty": "<span class=\"negrita textcolor1\">Ningún registro de gastos encontrado</span>",
@@ -142,8 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
         */
         //dom: 'l<"left"f><"right"B>tip<"clear">',
         dom: '<"left"l> <"left"f> <"right"B> t i p <"clear">',
-        buttons: [
-            {
+        buttons: [ //nos premite mostrar botones personalizados
+            { //boton para exportar a excel, utiliza una extension de datatables
                 extend: 'excelHtml5',
                 text: '<i class="material-icons tiny left">grid_on</i> Excel',
                 name: 'excelButton',
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 className: 'excelButton'
             },
-            {
+            { //boton personalizado, utiliza una accion que escribamos nosotros
                 text: '<i class="material-icons left">add</i> AÑADIR GASTO',
                 name: 'addGastoButton',
                 attr: {
@@ -162,20 +162,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     id: 'addGastoButton',
                     class: "btn green negita DTBM",
                 },
-                action: function () {
+                action: function () { //accion personalizada a ejecutar cuando se pulse el boton
                     M.toast({html: 'Añadir gasto'});
                 }
             }
         ],
-        //funcion a ejecutar una vez cargada la tabla
+        //funcion que se ejecuta cada vez que se carguen datos, https://datatables.net/reference/option/footerCallback
         "footerCallback" : (row, data, start, end, display) => {
+            //ej: sumamos el total de una columna y lo mostramos
             let total = data.reduce((a,b) => {
                 return a+b[2]
             },0);
             document.getElementById('totalGastos').innerHTML = `total ${total.toFixed(2)}€`;
         }
     });
-    M.AutoInit();
+    M.AutoInit(); //Inicializacion de materialize
 });
 
 function borrarRegistro(codigo) {
@@ -183,5 +184,6 @@ function borrarRegistro(codigo) {
 }
 
 function cargar() {
+    //nos permite recargar los datos con otra url
     tabla.ajax.url('datos/datos2.json').load();
 }
